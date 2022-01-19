@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/09 21:42:50 by osallak           #+#    #+#             */
-/*   Updated: 2022/01/14 14:06:16 by osallak          ###   ########.fr       */
+/*   Updated: 2022/01/18 21:31:48 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@
 # include <stdio.h>
 # include <stdbool.h>
 # include <fcntl.h>
+# include <mlx.h>
 # define BUFFER_SIZE 1024
+# define SIZE 36
 
 typedef struct s_pos
 {
@@ -35,6 +37,13 @@ typedef struct s_info
 	int		collectibles;
 	t_pos	new_position;
 	int		check_move;
+	void	*mlx_ptr;
+	void	*mlx_wndw;
+	void	*col_img;
+	void	*floor_img;
+	void	*house_img;
+	void	*plyr_img;
+	void	*wall_img;
 }	t_info;
 
 typedef struct s_pec
@@ -65,5 +74,8 @@ t_pos	find_player(char	**map);
 int		count_collects(char **map);
 bool	check_move_validity(t_info *ptr);
 void	move_udrl(t_info *ptr);
+void	load_imgs(t_info *ptr);
+void	render(t_info *ptr);
+int		key_hook(int keycode, t_info *ptr);
 
 #endif

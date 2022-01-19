@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 00:52:25 by osallak           #+#    #+#             */
-/*   Updated: 2022/01/13 16:59:41 by osallak          ###   ########.fr       */
+/*   Updated: 2022/01/14 20:18:55 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,32 @@ int	count_collects(char **map)
 				c++;
 	}
 	return (c);
+}
+
+t_pos	find_player(char	**map)
+{
+	int			y;
+	int			x;
+	t_pos		pos;
+	int			tmp;
+
+	y = -1;
+	tmp = 1;
+	while (map[++y])
+	{
+		x = -1;
+		while (map[y][++x])
+		{	
+			if (map[y][x] == 'P')
+			{
+				pos.line = y;
+				pos.colmun = x;
+				tmp = 0;
+				break ;
+			}
+		}
+		if (!tmp)
+			break ;
+	}
+	return (pos);
 }

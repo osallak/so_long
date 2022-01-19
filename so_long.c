@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/09 22:10:23 by osallak           #+#    #+#             */
-/*   Updated: 2022/01/14 15:59:34 by osallak          ###   ########.fr       */
+/*   Updated: 2022/01/18 21:32:53 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,32 +36,30 @@ char	**get_map(char *path, int height)
 
 int	main(int ac, char **av)
 {
-	t_info	*infos;
+	t_info	*ptr;
 
-	infos = (t_info *)malloc(sizeof(t_info));
+	ptr = (t_info *)malloc(sizeof(t_info));
 	if (ac != 2)
 		exit(0);//TODO print smthng and exit
 	if (!check_map_name(av[1]))
 		exit(0);//TODO invalid map name
-	infos->height = map_height(av[1]);
-	infos->map = get_map(av[1], infos->height);
-	if (!check_map_validity(infos->map))
+	ptr->height = map_height(av[1]);
+	ptr->map = get_map(av[1], ptr->height);
+	if (!check_map_validity(ptr->map))
 	{
 		printf("Error\nInvalid Map");// TODO free
-		return (0);
+		exit (0);
 	}
-	infos->collectibles = count_collects(infos->map);
-	infos->plr = find_player(infos->map);
-	infos->weight = ft_strlen(infos->map[0]);
-	int i = -1;
-	while (infos->map[++i])
-		printf("%s\n",infos->map[i]);
-	infos->check_move = 'R';
-	infos->new_position.line = infos->plr.line;
-	infos->new_position.colmun = infos->plr.colmun;
-	move_udrl(infos);
-	printf("\n--------------------------------\n");
-	i = -1;
-	while (infos->map[++i])
-		printf("%s\n",infos->map[i]);
+	ptr->collectibles = count_collects(ptr->map);
+	ptr->plr = find_player(ptr->map);
+	ptr->weight = ft_strlen(ptr->map[0]);
+	ptr->new_position.line = ptr->plr.line;
+	ptr->new_position.colmun = ptr->plr.colmun;
+	ptr->mlx_ptr = mlx_init();
+	ptr->mlx_wndw = mlx_new_window(ptr->mlx_ptr, (ptr->weight * SIZE), \
+									(ptr->height * SIZE), "so_long");
+	load_imgs(ptr);
+	render(ptr);
+	mlx_key_hook(ptr->mlx_wndw, key_hook, ptr);
+	mlx_loop(ptr->mlx_ptr);
 }

@@ -1,41 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   find_player.c                                      :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/10 20:37:01 by osallak           #+#    #+#             */
-/*   Updated: 2022/01/13 01:25:49 by osallak          ###   ########.fr       */
+/*   Created: 2022/01/19 15:47:05 by osallak           #+#    #+#             */
+/*   Updated: 2022/01/19 16:00:10 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../so_long.h"
+#include<libc.h>
+#include<stdbool.h>
 
-t_pos	find_player(char	**map)
+bool	ft_isdigit(char	*s)
 {
-	int			y;
-	int			x;
-	t_pos		pos;
-	int			tmp;
+	int	i;
 
-	y = -1;
-	tmp = 1;
-	while (map[++y])
-	{
-		x = -1;
-		while (map[y][++x])
-		{	
-			if (map[y][x] == 'P')
-			{
-				pos.line = y;
-				pos.colmun = x;
-				tmp = 0;
-				break ;
-			}
-		}
-		if (!tmp)
-			break ;
-	}
-	return (pos);
+	if (!*s)
+		return (false);
+	i = -1;
+	while (s[++i])
+		if (s[i] < 48 || s[i] > 57)
+			return (false);
+	return (s[i] ? false : true);
+}
+
+int	main(void)
+{
+	char	*input;
+	int		number;
+
+	scanf("%[^\n]",input);
+	printf(ft_isdigit(input) ? "True" : "False");
+	return (0);
 }
