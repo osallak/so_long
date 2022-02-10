@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: osallak <osallak@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 21:00:52 by messalih          #+#    #+#             */
-/*   Updated: 2022/01/14 01:25:04 by osallak          ###   ########.fr       */
+/*   Updated: 2022/02/07 19:54:55 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ static char	*get_remainder(char *buffer)
 		i++;
 	remainder = malloc((ft_strlen(buffer) - i) * sizeof(char) + 1);
 	if (!remainder)
-		return (NULL);
+	{
+		perror("Error");
+		exit(1);
+	}
 	while (buffer[i] != '\0')
 		remainder[j++] = buffer[i++];
 	remainder[j] = '\0';
@@ -55,8 +58,9 @@ static	char	*get_line(char *buffer)
 		str[i] = buffer[i];
 	if (buffer[i] == '\n' && !buffer[i + 1])
 	{
-		printf("Error\ninvalid map");
-		exit(0);//TODO create ft_error function
+		printf("Error\nempty line");
+		free(str);
+		exit(0);
 	}
 	str[i] = '\0';
 	return (str);
@@ -69,13 +73,19 @@ static	char	*read_buff(int fd, char *remainder)
 
 	buff = malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!buff)
-		return (NULL);
+	{
+		perror("Error");
+		exit(0);
+	}
 	i = 1;
 	while (!ft_strchr(remainder, '\n') && i)
 	{
 		i = read(fd, buff, BUFFER_SIZE);
 		if (i == -1)
-			return (free(buff), NULL);
+		{
+			perror("Error");
+			exit(1);
+		}
 		buff[i] = '\0';
 		remainder = ft_strjoin(remainder, buff);
 	}
@@ -88,7 +98,7 @@ char	*get_next_line(int fd)
 	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (NULL);
+		return (perror("Error"), NULL);
 	if (!ft_strchr(remainder, '\n'))
 		remainder = read_buff(fd, remainder);
 	if (!remainder)

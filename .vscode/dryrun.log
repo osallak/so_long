@@ -1,0 +1,20 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory `/Users/osallak/Desktop/long'
+cc -Wall -Wextra -Werror -c so_long.c -o so_long.o
+cc -Wall -Wextra -Werror -c map_checker/check_map_utils.c -o map_checker/check_map_utils.o
+cc -Wall -Wextra -Werror -c map_checker/general_map_check.c -o map_checker/general_map_check.o
+cc -Wall -Wextra -Werror -c map_checker/get_map_info.c -o map_checker/get_map_info.o
+cc -Wall -Wextra -Werror -c utils/utils.c -o utils/utils.o
+cc -Wall -Wextra -Werror -c utils/get_next_line.c -o utils/get_next_line.o
+cc -Wall -Wextra -Werror -c game_play/move_player.c -o game_play/move_player.o
+cc -Wall -Wextra -Werror -c rendring/load_imgs.c -o rendring/load_imgs.o
+cc -Wall -Wextra -Werror -c rendring/mlx_utils.c -o rendring/mlx_utils.o
+cc -Wall -Wextra -Werror -lmlx -framework OpenGL -framework AppKit -o so_long so_long.o map_checker/check_map_utils.o map_checker/general_map_check.o map_checker/get_map_info.o utils/utils.o utils/get_next_line.o game_play/move_player.o rendring/load_imgs.o rendring/mlx_utils.o
+echo "███████╗ ██████╗     ██╗      ██████╗ ███╗   ██╗ ██████╗"
+echo "██╔════╝██╔═══██╗    ██║     ██╔═══██╗████╗  ██║██╔════╝"
+echo "███████╗██║   ██║    ██║     ██║   ██║██╔██╗ ██║██║  ███╗"
+echo "╚════██║██║   ██║    ██║     ██║   ██║██║╚██╗██║██║   ██║"
+echo "███████║╚██████╔╝    ███████╗╚██████╔╝██║ ╚████║╚██████╔╝"
+echo "╚══════╝ ╚═════╝     ╚══════╝ ╚═════╝ ╚═╝  ╚═══╝ ╚═════╝"
+make: Leaving directory `/Users/osallak/Desktop/long'
+ 

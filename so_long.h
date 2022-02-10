@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: osallak <osallak@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/09 21:42:50 by osallak           #+#    #+#             */
-/*   Updated: 2022/01/18 21:31:48 by osallak          ###   ########.fr       */
+/*   Updated: 2022/02/07 22:38:03 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <fcntl.h>
 # include <mlx.h>
 # define BUFFER_SIZE 1024
-# define SIZE 36
+# define SIZE 40
 
 typedef struct s_pos
 {
@@ -63,11 +63,13 @@ bool	check_p_e_c(char **map);
 bool	check_map_validity(char	**map);
 bool	check_for_imposters(char **map);
 char	**get_map(char *path, int height);
+void	collect_map_info(t_info *ptr);
 //gnl utils
 int		ft_strlen(char *str);
 int		ft_strchr(char *s, int c);
 char	*ft_strjoin(char *s1, char *s2);
 char	*get_next_line(int fd);
+void	ft_free(char **map);
 //game play
 int		map_height(char *path);
 t_pos	find_player(char	**map);
@@ -77,5 +79,9 @@ void	move_udrl(t_info *ptr);
 void	load_imgs(t_info *ptr);
 void	render(t_info *ptr);
 int		key_hook(int keycode, t_info *ptr);
+bool	move_up(t_info *ptr);
+bool	move_down(t_info *ptr);
+bool	move_right(t_info *ptr);
+bool	move_left(t_info *ptr);
 
 #endif

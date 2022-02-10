@@ -3,38 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   move_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: osallak <osallak@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/13 17:46:43 by osallak           #+#    #+#             */
-/*   Updated: 2022/01/19 20:24:21 by osallak          ###   ########.fr       */
+/*   Updated: 2022/02/09 15:42:25 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"../so_long.h"
-
-bool	move_up(t_info *ptr)
-{
-	ptr->new_position.line--;
-	return (check_move_validity(ptr));
-}
-
-bool	move_down(t_info *ptr)
-{
-	ptr->new_position.line++;
-	return (check_move_validity(ptr));
-}
-
-bool	move_right(t_info *ptr)
-{
-	ptr->new_position.colmun++;
-	return (check_move_validity(ptr));
-}
-
-bool	move_left(t_info *ptr)
-{
-	ptr->new_position.colmun--;
-	return (check_move_validity(ptr));
-}
 
 bool	check_move_validity(t_info *ptr)
 {
@@ -47,7 +23,8 @@ bool	check_move_validity(t_info *ptr)
 	{
 		if (!ptr->collectibles)
 		{
-			write(1 ,"you Win\n", 8);
+			write (1, "you Win\n", 8);
+			ft_free(ptr->map);
 			exit (0);
 		}
 		return (false);
@@ -65,7 +42,8 @@ void	initialize_plr_pos(t_info *ptr)
 
 void	move_udrl(t_info *ptr)
 {
-	int	check;
+	int			check;
+	static int	moves;
 
 	check = true;
 	if (ptr->check_move == 'U')
@@ -83,6 +61,7 @@ void	move_udrl(t_info *ptr)
 		initialize_plr_pos(ptr);
 		return ;
 	}
+	printf("Number of Moves : %d\n", ++moves);
 	ptr->map[ptr->plr.line][ptr->plr.colmun] = '0';
 	ptr->map[ptr->new_position.line][ptr->new_position.colmun] = 'P';
 	ptr->plr.line = ptr->new_position.line;
@@ -92,12 +71,15 @@ void	move_udrl(t_info *ptr)
 
 int	key_hook(int keycode, t_info *ptr)
 {
-	(void)ptr;
 	if (keycode == 53)
+	{
+		mlx_destroy_window(ptr->mlx_ptr, ptr->mlx_wndw);
+		ft_free(ptr->map);
 		exit(0);
+	}
 	if (keycode == 13)
 		ptr->check_move = 'U';
-	else if(keycode == 1)
+	else if (keycode == 1)
 		ptr->check_move = 'D';
 	else if (keycode == 2)
 		ptr->check_move = 'R';

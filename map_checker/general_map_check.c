@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   general_map_check.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: osallak <osallak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: osallak <osallak@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/09 21:40:49 by osallak           #+#    #+#             */
-/*   Updated: 2022/01/13 00:42:59 by osallak          ###   ########.fr       */
+/*   Updated: 2022/02/05 17:32:47 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,9 @@ bool	check_for_imposters(char **map)
 
 bool	check_map_validity(char	**map)
 {
-	bool	checker;
-
 	if (!map || !*map)
 		return (false);
-	checker = true;
-	checker *= check_first_last(map);
-	checker *= if_rectangular(map);
-	checker *= if_surrounded_by_walls(map);
-	checker *= check_p_e_c(map);
-	checker *= check_for_imposters(map);
-	return (checker);
+	return (check_first_last(map) && if_rectangular(map) \
+		&& if_surrounded_by_walls(map) && check_p_e_c(map) \
+		&& check_for_imposters(map));
 }

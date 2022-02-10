@@ -7,7 +7,9 @@ SRCS = so_long.c \
 		utils/get_next_line.c \
 		game_play/move_player.c \
 		rendring/load_imgs.c \
-		rendring/mlx_utils.c
+		rendring/mlx_utils.c \
+		utils/ft_free.c \
+		game_play/move_functions.c
 
 OBJS = $(SRCS:%.c=%.o)
 CFLAGS = -Wall -Wextra -Werror
@@ -26,7 +28,7 @@ $(NAME): $(OBJS)
 	@$(CC) $(CFLAGS) -lmlx -framework OpenGL -framework AppKit -o $(NAME) $^
 
 %.o: %.c
-	@$(CC) $(CFLAGS) -c $^ -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean :
 	@$(RM) $(OBJS)
