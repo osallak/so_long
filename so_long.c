@@ -6,7 +6,7 @@
 /*   By: osallak <osallak@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/09 22:10:23 by osallak           #+#    #+#             */
-/*   Updated: 2022/02/10 20:48:56 by osallak          ###   ########.fr       */
+/*   Updated: 2022/02/11 17:29:12 by osallak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,13 @@ int	main(int ac, char **av)
 	if (ac != 2)
 	{
 		printf("Error\nwrong number of arguments");
+		free(ptr);
 		exit(0);
 	}
 	if (!check_map_name(av[1]))
 	{
 		printf("Error\ninvalid map name");
+		free(ptr);
 		exit(0);
 	}
 	ptr->height = map_height(av[1]);
